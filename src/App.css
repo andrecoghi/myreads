@@ -162,6 +162,15 @@ button:active {
   align-items: flex-end;
 }
 
+.warning-message {
+  margin-top: 2em;
+  margin-left: 2em;
+  position: relative;
+  height: 300px;
+  display: flex;
+  color: #999;
+}
+
 .book-shelf-changer {
   position: absolute;
   right: 0;
