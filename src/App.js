@@ -24,7 +24,7 @@ class BooksApp extends React.Component {
     });
   }
 
-  handleChangeShelf = (e, bookToUpdateShelf) => {
+  handleChangeBookShelf = (e, bookToUpdateShelf) => {
     const shelf = e.target.value;
     bookToUpdateShelf.shelf = shelf;
 
@@ -43,7 +43,7 @@ class BooksApp extends React.Component {
     });
   };
 
-  handleSearch = query => {
+  handleSearchBooks = query => {
     if (query.length > 0) {
       BooksAPI.search(query)
         .then(foundBooks => {
@@ -59,6 +59,13 @@ class BooksApp extends React.Component {
     }
     this.setState({
       query: query
+    });
+  };
+  
+  handleClearBooksSearch = query => {
+    this.setState({
+      query: query,
+      filteredBooks: []
     });
   };
 
@@ -103,12 +110,6 @@ class BooksApp extends React.Component {
     book.authors = authors;
   }
 
-  handleClearBooksSearch = query => {
-    this.setState({
-      query: query,
-      filteredBooks: []
-    });
-  };
 
   render() {
     return (
@@ -122,7 +123,7 @@ class BooksApp extends React.Component {
               <BookShelf
                 onClearBooksSearch={query => this.handleClearBooksSearch(query)}
                 books={this.state.books}
-                onChangeShelf={this.handleChangeShelf}
+                onChangeShelf={this.handleChangeBookShelf}
               />
             )}
           />
@@ -131,10 +132,10 @@ class BooksApp extends React.Component {
             render={({ history }) => (
               <BooksSearch
                 query={this.state.query}
-                onSearchBooks={query => this.handleSearch(query)}
+                onSearchBooks={query => this.handleSearchBooks(query)}
                 filteredBooks={this.state.filteredBooks}
                 onChangeShelf={(event, bookToUpdateShelf) => {
-                  this.handleChangeShelf(event, bookToUpdateShelf);
+                  this.handleChangeBookShelf(event, bookToUpdateShelf);
                   history.push("/");
                 }}
               />
