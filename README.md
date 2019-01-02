@@ -20,7 +20,7 @@ npm start
 ```
 http://localhost:3000/ 
 
-## better performance with 
+## better performance with Debounce Input
 As the user types to prevent of firing a lots of server requests, we can set it to fire only few times using [react-debounce-input] (https://www.npmjs.com/package/react-debounce-input).
 
 ## How to Use this App
