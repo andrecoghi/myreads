@@ -29,7 +29,7 @@ As the user types to prevent of firing a lots of server requests, we can set it 
 - To interchange the books between shelves or remove a book we can click on the green button on the book cover
 
 - To add new books, click on search button at the bottom of the page.
-  Enter with a [search terms](#search-terms)
+  Enter with [search terms](#search-terms)
 
 _Note: The backend API [BooksAPI] is limited to a fixed set of [search terms](#search-terms) as we can see below
 
