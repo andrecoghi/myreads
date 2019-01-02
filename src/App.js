@@ -12,33 +12,27 @@ class BooksApp extends React.Component {
     filteredBooks: []
   };
 
-  componentDidMount() {
-    BooksAPI.getAll().then(books => {
-      let booksAux = books.map(book => {
-        this.dealWithThumbnailAndAuthor(book);
-        return book;
-      });
-      this.setState(() => ({
-        books: booksAux
-      }));
+  async componentDidMount() {
+    const books = await BooksAPI.getAll();
+    let booksAux = books.map(book => {
+      this.dealWithThumbnailAndAuthor(book);
+      return book;
     });
+    this.setState({ books: booksAux });
   }
 
   handleChangeBookShelf = (e, bookToUpdateShelf) => {
     const shelf = e.target.value;
-    bookToUpdateShelf.shelf = shelf;
 
-    this.setState(state => {
-      BooksAPI.update(bookToUpdateShelf, shelf).then(response => {
+    BooksAPI.update(bookToUpdateShelf, shelf).then(response => {
+      this.setState(state => {
         bookToUpdateShelf.shelf = shelf;
         const updateBooks = state.books.filter(
           b => b.id !== bookToUpdateShelf.id
         );
         updateBooks.push(bookToUpdateShelf);
 
-        this.setState({
-          books: updateBooks
-        });
+        return { books: updateBooks };
       });
     });
   };
@@ -61,7 +55,7 @@ class BooksApp extends React.Component {
       query: query
     });
   };
-  
+
   handleClearBooksSearch = query => {
     this.setState({
       query: query,
@@ -109,7 +103,6 @@ class BooksApp extends React.Component {
     }
     book.authors = authors;
   }
-
 
   render() {
     return (
