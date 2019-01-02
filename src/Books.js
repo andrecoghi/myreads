@@ -1,6 +1,7 @@
 import React from "react";
+import { PureComponent } from 'react';
 
-class Books extends React.Component {
+class Books extends PureComponent {
   render() {
     const { onChangeShelf, shelf, title, values } = this.props;
 
